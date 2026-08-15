@@ -20,7 +20,10 @@ function Column({ column, board, priorityFilter, onRefresh }) {
   const createTask = async (e) => {
     e.preventDefault();
 
-    if (!title.trim()) return;
+    if (!title.trim()) {
+      setError("Title is required.");
+      return;
+    }
 
     try {
       setSubmitting(true);
@@ -40,8 +43,10 @@ function Column({ column, board, priorityFilter, onRefresh }) {
 
       await onRefresh();
     } catch (error) {
-      console.error("Failed to create task:", error);
-      setError("Failed to create task. Please try again.");
+      setError(
+        error.response?.data?.error ||
+          "Failed to create task. Please try again.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -127,7 +132,10 @@ function Column({ column, board, priorityFilter, onRefresh }) {
           <Button
             variant="ghost"
             className="w-full text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100"
-            onClick={() => setShowForm(true)}
+            onClick={() => {
+              setError("");
+              setShowForm(true);
+            }}
           >
             + Add task
           </Button>
