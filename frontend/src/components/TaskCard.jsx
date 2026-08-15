@@ -15,7 +15,10 @@ function TaskCard({ task, board, onRefresh }) {
   const updateTask = async (e) => {
     e.preventDefault();
 
-    if (!title.trim()) return;
+    if (!title.trim()) {
+      setError("Title is required.");
+      return;
+    }
 
     try {
       setSaving(true);
@@ -30,8 +33,10 @@ function TaskCard({ task, board, onRefresh }) {
       setEditing(false);
       await onRefresh();
     } catch (error) {
-      console.error("Failed to update task:", error);
-      setError("Failed to update task. Please try again.");
+      setError(
+        error.response?.data?.error ||
+          "Failed to update task. Please try again.",
+      );
     } finally {
       setSaving(false);
     }
@@ -46,8 +51,10 @@ function TaskCard({ task, board, onRefresh }) {
       await api.delete(`/tasks/${task.id}`);
       await onRefresh();
     } catch (error) {
-      console.error("Failed to delete task:", error);
-      setError("Failed to delete task. Please try again.");
+      setError(
+        error.response?.data?.error ||
+          "Failed to delete task. Please try again.",
+      );
     }
   };
 
@@ -65,8 +72,9 @@ function TaskCard({ task, board, onRefresh }) {
 
       await onRefresh();
     } catch (error) {
-      console.error("Failed to move task:", error);
-      setError("Failed to move task. Please try again.");
+      setError(
+        error.response?.data?.error || "Failed to move task. Please try again.",
+      );
     }
   };
 
@@ -78,7 +86,10 @@ function TaskCard({ task, board, onRefresh }) {
       >
         <input
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => {
+            setTitle(e.target.value);
+            setError("");
+          }}
           className="w-full rounded-md border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 outline-none"
         />
 
@@ -110,7 +121,10 @@ function TaskCard({ task, board, onRefresh }) {
             type="button"
             variant="outline"
             className="text-zinc-900"
-            onClick={() => setEditing(false)}
+            onClick={() => {
+              setError("");
+              setEditing(false);
+            }}
           >
             Cancel
           </Button>
@@ -143,7 +157,14 @@ function TaskCard({ task, board, onRefresh }) {
         {error && <p className="text-sm text-red-400">{error}</p>}
 
         <div className="flex flex-wrap gap-2">
-          <Button size="sm" variant="outline" onClick={() => setEditing(true)}>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => {
+              setError("");
+              setEditing(true);
+            }}
+          >
             Edit
           </Button>
 
