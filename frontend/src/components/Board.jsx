@@ -94,7 +94,7 @@ function Board() {
       </header>
 
       <div className="mx-auto max-w-7xl px-3 py-4 sm:px-6 sm:py-6">
-        <div className="grid gap-4 pb-6 min-[1150px]:flex min-[1150px]:overflow-x-auto">
+        <div className="grid gap-4 pb-6 min-[1150px]:grid-cols-3 min-[1150px]:justify-items-center">
           {board.columns.map((column) => (
             <Column
               key={column.id}

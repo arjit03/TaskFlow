@@ -48,7 +48,7 @@ function Column({ column, board, priorityFilter, onRefresh }) {
   };
 
   return (
-    <Card className="w-full border-zinc-800 bg-zinc-900/70 text-zinc-100 min-[1150px]:w-[340px] min-[1150px]:shrink-0">
+    <Card className="w-full border-zinc-800 bg-zinc-900/70 text-zinc-100 min-[1150px]:w-[340px]">
       <CardHeader className="border-b border-zinc-800">
         <CardTitle className="flex items-center justify-between">
           <span>{column.name}</span>
