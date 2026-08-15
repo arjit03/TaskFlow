@@ -21,10 +21,11 @@ function Board() {
           setBoard(response.data);
         }
       } catch (error) {
-        console.error("Failed to fetch board:", error);
-
         if (!cancelled) {
-          setError("Failed to load the board. Please try again.");
+          setError(
+            error.response?.data?.error ||
+              "Failed to load the board. Please try again.",
+          );
         }
       } finally {
         if (!cancelled) {
