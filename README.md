@@ -69,7 +69,7 @@ These instructions are intended to work from a fresh clone.
 ### 1. Clone the repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone https://github.com/arjit03/TaskFlow
 cd TaskFlow
 ```
 
