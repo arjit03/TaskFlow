@@ -136,10 +136,7 @@ Open another terminal and run:
 ```bash
 cd frontend
 npm install
-npm run dev
 ```
-
-Vite will display the local development URL in the terminal.
 
 ### Production build
 
@@ -335,7 +332,7 @@ The test suite covers:
 - Add task-title search.
 - Add more comprehensive validation and backend tests.
 - Improve the UI with more immediate updates instead of refreshing the board after each mutation.
-- Support multiple boards if the application were expanded beyond the assignment scope.
+- Add user-specific boards with authentication and authorization (for example, JWT-based authentication).
 
 ## Time Spent
 
